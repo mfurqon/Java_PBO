@@ -1,0 +1,49 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+import java.util.HashMap;
+/**
+ *
+ * @author Toshiba
+ */
+public class Motor {
+    private HashMap<String, Double> merkToJenisMotor = new HashMap<>();
+    
+    public Motor(){
+        merkToJenisMotor.put("Honda-Bebek", 19100000.00);
+        merkToJenisMotor.put("Honda-Matic", 22500000.00);
+        merkToJenisMotor.put("Honda-Sport", 37300000.00);
+        merkToJenisMotor.put("Yamaha-Bebek", 19800000.00);
+        merkToJenisMotor.put("Yamaha-Matic", 31600000.00);
+        merkToJenisMotor.put("Yamaha-Sport", 37800000.00);
+    }
+    
+    public double getHarga(String merk, String jenis){
+        String key = merk + "-" + jenis;
+        if(merkToJenisMotor.containsKey(key)){
+            return merkToJenisMotor.get(key);
+        }
+        return 0;
+    }
+    
+    public double getDiskon(String jenis, double harga){
+        if(jenis.equals("Bebek")){
+            return harga * (5.0/100);
+        }
+        else if(jenis.equals("Matic")){
+            return harga * (3.0/100);
+        }
+        else if(jenis.equals("Sport")){
+            return harga * (1.0/100);
+        }
+        return 0.00;
+    }
+    
+    
+    public double getTotalHarga(String jenis, double harga){
+//        int harga = getHarga(merk, jenis);
+        double diskon = getDiskon(jenis, harga);
+        return harga - diskon;
+    }
+}    
